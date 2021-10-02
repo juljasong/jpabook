@@ -1,13 +1,12 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Book;
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
+import jpabook.jpashop.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
 public class JpaMain {
 
@@ -20,13 +19,23 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Book book = new Book();
-            book.setName("JPA");
-            book.setAuthor("SONG");
+            Address address = new Address("city", "street", "10000");
 
-            em.persist(book);
+            Member member = new Member();
+            member.setId(1L);
+            member.setName("Song");
+            member.setAddress(address);
+
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            Member member1 = em.find(Member.class, 1L);
+            System.out.println(member1.getAddress().fullAddress());
 
             tx.commit();
+
         } catch (Exception e) {
             tx.rollback();
         } finally {

@@ -1,8 +1,5 @@
-# 테이블 구조
-![img_1.png](img_1.png)
-
 # 객체 구조
-![img.png](img.png)
+![img_3.png](img_3.png)
 
 - @XXXToOne 연관관계 지연로딩으로 변경
 - 영속성 전이 설정
